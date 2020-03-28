@@ -106,4 +106,5 @@ Pull es un comando que combina ambos
 ````
 git fetch origin    -> Trae la información de origin (el repositorio remoto)
 git pull            -> Trae los cambios del remoto
+git fetch -ap       -> Trae los cambios en el índice -a (todos los remotos) y -p de prume (Borra las ramas que ya no existan) 
 ````
