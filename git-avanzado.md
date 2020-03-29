@@ -30,3 +30,6 @@ Los commits se componen de título y cuerpo. El título en la primera linea, lue
 - Utilizar el cuerpo para definir el "qué" y el "por qué"
 
 
+### Estrategias de merging
+
+Merge y Rebase
