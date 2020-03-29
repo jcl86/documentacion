@@ -30,19 +30,29 @@ Los commits se componen de título y cuerpo. El título en la primera linea, lue
 - Utilizar el cuerpo para definir el "qué" y el "por qué"
 
 
-### Estrategias de integracion entre ramas
+# Estrategias de integracion entre ramas
 
-Las siguientes estrategias sirven para, cuando estas trabajando en una rama (Develop, o tu feature-branch), y a medida que se van produciendo commits en master, traerte esos cambios a tu rama
+Las siguientes estrategias sirven para, cuando estas trabajando en una rama (Develop, o tu feature-branch), y a medida que se van produciendo commits en master, traerte esos cambios a tu rama.
+
+### Merge y rebase
 
 ````
 git merge master
 ````
-Trae los commits realizados en master, y los pone en tu rama actual, añadiendo un unico commit con esos cambios
+Merge trae los commits realizados en master, y los pone en tu rama actual, añadiendo un unico commit con esos cambios
 
 ````
 git rebase master
 ````
 
-Trae todos los commits realizados en master, y los coloca en orden en antes de los commits de tu rama. Esto en realidad a recreado el índice, por lo que en realidad tu rama ha cambiado completamente. Cuando vuelques los commits de tu rama en el remoto, deberás hacer un push --force, para que se olvide de como está tu rama en el remote, y sobreescriba los cambiso de tu local en el remote. Esto solo es viable si sobre la rama que haces rebase trabaja un solo desarrollador, porque si trabajan varios, al hacer push y reorganizar la rama, harás que los otros desarrolladores tengan conflictos.
+Rebase trae todos los commits realizados en master, y los coloca en orden en antes de los commits de tu rama. Esto en realidad a recreado el índice, por lo que en realidad tu rama ha cambiado completamente. Cuando vuelques los commits de tu rama en el remoto, deberás hacer un push --force, para que se olvide de como está tu rama en el remote, y sobreescriba los cambiso de tu local en el remote. Esto solo es viable si sobre la rama que haces rebase trabaja un solo desarrollador, porque si trabajan varios, al hacer push y reorganizar la rama, harás que los otros desarrolladores tengan conflictos.
 
+````
+git rebase -i HEAD~3
+r i-commit-1
+s i-commit-2
+s i-commit-3
+[esc]:wq
+````
 
+Squash agrupa varios commits en uno. En este caso, coge el commit en el que está el head y los dos anteriores, y los agrupa en un solo commit cuyo nombre habrá que introducir
