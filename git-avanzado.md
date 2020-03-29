@@ -30,6 +30,19 @@ Los commits se componen de título y cuerpo. El título en la primera linea, lue
 - Utilizar el cuerpo para definir el "qué" y el "por qué"
 
 
-### Estrategias de merging
+### Estrategias de integracion entre ramas
 
-Merge y Rebase
+Las siguientes estrategias sirven para, cuando estas trabajando en una rama (Develop, o tu feature-branch), y a medida que se van produciendo commits en master, traerte esos cambios a tu rama
+
+````
+git merge master
+````
+Trae los commits realizados en master, y los pone en tu rama actual, añadiendo un unico commit con esos cambios
+
+````
+git rebase master
+````
+
+Trae todos los commits realizados en master, y los coloca en orden en antes de los commits de tu rama. Esto en realidad a recreado el índice, por lo que en realidad tu rama ha cambiado completamente. Cuando vuelques los commits de tu rama en el remoto, deberás hacer un push --force, para que se olvide de como está tu rama en el remote, y sobreescriba los cambiso de tu local en el remote. Esto solo es viable si sobre la rama que haces rebase trabaja un solo desarrollador, porque si trabajan varios, al hacer push y reorganizar la rama, harás que los otros desarrolladores tengan conflictos.
+
+
