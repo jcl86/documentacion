@@ -24,6 +24,8 @@ Estado del repositorio
 git status      -> Muestra el estado del repositorio
 git status -s   -> Muestra el estado del repositorio de forma resumida
 git log         -> Muestra los commits del repositorio 
+git log         -> Muestra los commits del repositorio con el gráfico
+git log --graph --abbrev-commit --oneline  -> Muestra los commits del repositorio con el gráfico pero abreviado
 ````
 
 ### Staging y commits
@@ -108,3 +110,4 @@ git fetch origin    -> Trae la información de origin (el repositorio remoto)
 git pull            -> Trae los cambios del remoto
 git fetch -ap       -> Trae los cambios en el índice -a (todos los remotos) y -p de prume (Borra las ramas que ya no existan) 
 ````
+
