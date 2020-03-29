@@ -1,5 +1,5 @@
 
-# Gestión de git
+# Comandos básicos de git
 
 Situarse en la carpeta correspondiente e iniciar el repositorio
 ````
