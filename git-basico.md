@@ -28,6 +28,7 @@ git log         -> Muestra los commits del repositorio con el gráfico
 git log --graph --abbrev-commit --oneline  -> Muestra los commits del repositorio con el gráfico pero abreviado
 git log --one-line -> Muestra los commits del repositorio en una linea
 git show identificador-commit -> Muestra el detalle de un commmit
+git blame fichero  -> Historia de cambios de un fichero y quien lo ha hecho
 ````
 
 ### Staging y commits
