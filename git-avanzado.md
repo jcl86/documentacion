@@ -1,4 +1,4 @@
-# GESTiÖN AVANZADA CON GIT
+# GESTIÓN AVANZADA CON GIT
 
 ### .gitignore global
 
@@ -88,7 +88,19 @@ Hard -> Descarta los cambios deshechos del commit del working tree
 
 #### Amend
 ````
-git commit --amend
+git commit --amend            -> pudiendo editar el título del commit    
+git commit --amend --no-edit  -> Sin editar el título del commit
 ````
 
 Hace commit de los cambios subidos y los junta al commit anterior
+
+### Cherry pick
+
+Cherry pick se usa para volvar unos cambios concretos a master. por ejemplo, un commit que arregla un bug en producción, y que solo se quiere volcar ese único commit.
+Desde master, cojo una o más cerezas (cereza = commit) y me la como (la integro en master)
+
+````
+git checkout master -> Me cambio a la rama master
+git cherry-pick identificadorCommit
+git cherry-pick commitDesde~..commitHasta
+````
