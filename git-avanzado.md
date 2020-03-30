@@ -1,4 +1,4 @@
-# Gestión avanzada con git
+# GESTiÖN AVANZADA CON GIT
 
 ### .gitignore global
 
@@ -30,7 +30,7 @@ Los commits se componen de título y cuerpo. El título en la primera linea, lue
 - Utilizar el cuerpo para definir el "qué" y el "por qué"
 
 
-# Estrategias de integracion entre ramas
+# ESTRATEGIAS DE INTEGRACIÓN ENTRE RAMAS
 
 Las siguientes estrategias sirven para, cuando estas trabajando en una rama (Develop, o tu feature-branch), y a medida que se van produciendo commits en master, traerte esos cambios a tu rama.
 
@@ -56,3 +56,39 @@ s i-commit-3
 ````
 
 Squash agrupa varios commits en uno. En este caso, coge el commit en el que está el head y los dos anteriores, y los agrupa en un solo commit cuyo nombre habrá que introducir
+
+
+# VOLVIENDO ATRÁS
+
+#### Revert 
+
+Revertir commits, respetando el historico. El revert crea un nuevo commit que deshace los cambios.
+
+````
+git revert @  -> revierte el último commit
+git revert HEAD~n  -> revierte el commit n, donde n es el número de commits que te vas hacia atrás
+git revert @  -> revierte el último commit
+
+````
+
+#### Undo, discard y reset
+
+Deshacer commits, es decir, borrarlos del log como si no se hubieran hecho
+
+````
+git undo -> Es un alias de git reset HEAD~1 --mixed
+git discard -> Es un alias de git reset HEAD~1 --hard
+````
+HEAD~1 es el útimo commit
+
+Soft -> Deja los cambios deshechos del commit subidos en el staging area
+Mixed -> Deja los cambios deshechos del commit en el working tree (sin subir al staging area)
+Hard -> Descarta los cambios deshechos del commit del working tree
+
+
+#### Amend
+````
+git commit --amend
+````
+
+Hace commit de los cambios subidos y los junta al commit anterior
