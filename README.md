@@ -10,4 +10,6 @@ Documentación para describir diversos procedimientos
 
 # Aspnet core
 
+[Consola](aspnet-consola.md)
+
 [Serilog](serilog.md)
