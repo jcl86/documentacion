@@ -26,6 +26,8 @@ git status -s   -> Muestra el estado del repositorio de forma resumida
 git log         -> Muestra los commits del repositorio 
 git log         -> Muestra los commits del repositorio con el gráfico
 git log --graph --abbrev-commit --oneline  -> Muestra los commits del repositorio con el gráfico pero abreviado
+git log --one-line -> Muestra los commits del repositorio en una linea
+git show identificador-commit -> Muestra el detalle de un commmit
 ````
 
 ### Staging y commits
