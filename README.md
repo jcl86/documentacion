@@ -15,3 +15,7 @@
 [Consola](aspnet-consola.md)
 
 [Serilog](serilog.md)
+
+## Otros
+
+[Paquetes nuget](nuget.md)
