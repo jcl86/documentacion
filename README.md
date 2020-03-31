@@ -1,8 +1,10 @@
-# Documentacion
 
-Documentación para describir diversos procedimientos
+# Configuración de entornos de desarrollo
 
-# Gestión con git
+[Visual Studio](visual-studio.md)
+
+
+# Control de versiones
 
 [Comandos básicos de git](git-basico.md)
 
