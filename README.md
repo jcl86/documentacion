@@ -1,21 +1,15 @@
+# GIT
 
-# Configuración de entornos de desarrollo
+[Comandos básicos](git-basico.md)
 
-[Visual Studio](visual-studio.md)
+[Gestión avanzada](git-avanzado.md)
 
+# dotnet
 
-# Control de versiones
+[Configurar opciones en Visual Studio](visual-studio.md)
 
-[Comandos básicos de git](git-basico.md)
-
-[Gestión avanzada con git](git-avanzado.md)
-
-# Aspnet core
-
-[Consola](aspnet-consola.md)
+[Arrancar un proyecto existente](arrancar-proyecto.md)
 
 [Serilog](serilog.md)
 
-## Otros
-
-[Paquetes nuget](nuget.md)
+[Mundo nuget](nuget.md)
