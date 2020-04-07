@@ -1,5 +1,49 @@
 # GESTIÓN AVANZADA CON GIT
 
+### Alias
+
+Distingimos dos tipos de alias:
+
+##### Alias de git
+
+Los alias de git se guardan en C:\Users\usuario\.gitconfig, en el apartado [alias].
+Para ejecutarlos tendrás que teclear git seguido del alias
+
+##### Alias de terminal
+
+Los alias de terminal se guardan en la propia configuración de la terminal. En el caso de cmder en: *Cmder\config\user_aliases.cmd*
+
+````
+alias                                         -> Muestra lista de alias y lista de comandos relacionados
+alias {nombre alias}="{comando largo}"        -> Crea un alias
+unalias {nombre de alias}                     -> Elimina un alias
+````
+
+**EJEMPLO: Paso a paso para crear un alias**
+
+Voy a combinar los dos tipos de alias.
+
+1. Primero creo el alias de git.
+
+````
+cd C:\Users\Jorge
+code .gitconfig
+````
+
+Añado en la sección de alias *alias s = "status"*
+
+2. Luego creo el alias de terminal
+
+````
+alias gs="git s"
+````
+
+**Resultado final**
+
+Hemos conseguido que al escribir *gs* se ejecute el comando *git status*
+
+---
+
 ### .gitignore global
 
 Se pueden mover los archivos a ignorar globales, que no son parte del proyecto sino que dependen de tu entorno de desarrollo (.vs etc) a un fichero de ignore global
