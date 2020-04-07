@@ -15,7 +15,7 @@ Los alias de terminal se guardan en la propia configuración de la terminal. En 
 
 ````
 alias                                         -> Muestra lista de alias y lista de comandos relacionados
-alias {nombre alias}="{comando largo}"        -> Crea un alias
+alias {nombre alias}={comando largo}          -> Crea un alias (¡No poner comillas!)
 unalias {nombre de alias}                     -> Elimina un alias
 ````
 
@@ -30,12 +30,12 @@ cd C:\Users\Jorge
 code .gitconfig
 ````
 
-Añado en la sección de alias *alias s = "status"*
+Añado en la sección de alias *alias s = status*
 
 2. Luego creo el alias de terminal
 
 ````
-alias gs="git s"
+alias gs=git s
 ````
 
 **Resultado final**
