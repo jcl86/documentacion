@@ -126,13 +126,15 @@ git discard -> Es un alias de git reset HEAD~1 --hard
 HEAD~1 es el útimo commit
 
 Soft -> Deja los cambios deshechos del commit subidos en el staging area
+
 Mixed -> Deja los cambios deshechos del commit en el working tree (sin subir al staging area)
+
 Hard -> Descarta los cambios deshechos del commit del working tree
 
 
 #### Amend
 ````
-git commit --amend            -> pudiendo editar el título del commit    
+git commit --amend -m "nuevo titulo" -> pudiendo editar el título del commit    
 git commit --amend --no-edit  -> Sin editar el título del commit
 ````
 
@@ -140,7 +142,7 @@ Hace commit de los cambios subidos y los junta al commit anterior
 
 ### Cherry pick
 
-Cherry pick se usa para volvar unos cambios concretos a master. por ejemplo, un commit que arregla un bug en producción, y que solo se quiere volcar ese único commit.
+Cherry pick se usa para volcar unos cambios concretos a master. por ejemplo, un commit que arregla un bug en producción, y que solo se quiere volcar ese único commit.
 Desde master, cojo una o más cerezas (cereza = commit) y me la como (la integro en master)
 
 ````
