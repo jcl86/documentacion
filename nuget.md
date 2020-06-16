@@ -115,3 +115,4 @@ En cada push en cualquier rama:
   </PropertyGroup>
 ````
 
+- Tal y como hemos configurado *rohith/publish-nuget@v2*, toma la versión del csproj. Si la versión ya existiera, nos dará un error 409
