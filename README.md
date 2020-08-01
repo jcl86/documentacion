@@ -13,3 +13,7 @@
 [Serilog](serilog.md)
 
 [Mundo nuget](nuget.md)
+
+### Paso a paso
+
+[Montar una librería de clases que se despliege en Nuget](class-library-nuget.md)
