@@ -115,11 +115,11 @@ Source link es una tecnología que permite depurar código de las dependencias n
 
 Activar la descarga de símbolos en: Herramientas / Opciones / Depuración / Símbolos
 
-(/img/source-link-1.jpg)
+![Símbolos](img/source-link-1.jpg)
 
 Activar y desactivar las siguientes opciones en Herramientas / Opciones / Depuración / General
 
-(/img/source-link-2.jpg)
+![Depuración](img/source-link-2.jpg)
 
 Cuando quiera dejar de entrar en paquetes nuget, puedo activar el check de habilitar solo mi código.
 
