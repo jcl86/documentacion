@@ -1,6 +1,6 @@
 # Montar una librería de clases en github
 
-Este documento describe los pasos seguidos [este video](https://www.youtube.com/watch?v=hilY0lLxaOs&t=1544s), que consiste en cofigurar una librería de clases, con el código alojado en github, y que se compila y despliega como paquete en nuget.
+Este documento describe los pasos seguidos [este video](https://www.youtube.com/watch?v=hilY0lLxaOs&t=1544s). En el se detalla el proceso de configurar una librería de clases, con el código alojado en github, y que se compila y despliega como paquete nuget. La solución completa se encuentra en [este repositorio](https://github.com/madriddotnet/meetup-github-setup).
 
 
 ### 1. Creación del proyecto
@@ -16,7 +16,7 @@ Una vez tenemos git funcionando, montamos una solución en visual studio, con al
 
 ### 2. Definir ficheros de configuración
 
-Podemos definir un fichero *global.json*, que guardará la versión necesaria del dsk de netcore para que la solución funcione. Así, si te descargas el código y no tienes el sdk necesario, te avisará de que necesitas esa versión concreta
+Podemos definir un fichero *global.json*, que guardará la versión necesaria del dsk de netcore para que la solución funcione. Así, quien se clone el repositorio y no tenga el sdk necesario, te avisará de que necesitas esa versión concreta.
 
 ````
 dotnet new global.json
@@ -43,7 +43,7 @@ Creamos una carpeta en la raiz del repositorio llamada *build*, y dentro un fich
 </Project>
 ````
 
-En el ejemplo, me he definido dos variables, una con la versión de netocre que voy a usar, y otra con la versión de netstandard. De esta manera, cuando tenga multiples proyectos en mi solución, en vez de que cada uno referencia el sdk concreto, hara referencia a la variable definida. En el momento que quiera subir o bajar alguna versión, lo actualizaré en el fichero que acabo de crear.
+En el ejemplo, me he definido dos variables, una con la versión de netcore que voy a usar, y otra con la versión de netstandard. De esta manera, cuando tenga multiples proyectos en mi solución, en vez de que cada uno referencia el sdk concreto, hara referencia a la variable definida. En el momento que quiera subir o bajar alguna versión, lo actualizaré en el fichero que acabo de crear.
 
 El fichero csproj de la librería de clases haciendo referencia a la variable quedaría así:
 ````
@@ -54,7 +54,7 @@ El fichero csproj de la librería de clases haciendo referencia a la variable qu
 </Project>
 ````
 
-##### Directory.Build-props
+##### Directory.Build.props
 
 En la raiz del repositorio, creamos un fichero llamado Directory.Build.props
 ````
@@ -182,3 +182,15 @@ Solo faltaría añadir las propiedades particulares a nuestro proyecto principal
 <PackageVersion>1.0.1$(VersionSuffix)</PackageVersion>
 <Description>description</Description>
 ````
+
+### Scripts de utilidad
+
+Destacar varios scripts que son de utilidad, que se pueden tomar como ejemplo de [aquí](https://github.com/madriddotnet/meetup-github-setup). Todos los scripts están disponibles en formato powershell para windows y bash para linux o mac
+
+- dotnet-install -> Script que instala el sdk de netcore
+
+- install-sdk -> Llama al script anterior, para instalar la versión concreta que requiere el proyecto. (Que debería coincidir con la que definimos en el fichero *global.json*)
+
+- build -> Compila el proyecto, pasa los tests, y genera el paquete nuget en la carpeta artifacts
+
+
