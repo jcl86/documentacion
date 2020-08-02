@@ -214,12 +214,13 @@ Podemos crear una Action en github que desencadene el proceso de despliegue, que
 ````
 name: Publish on Nuget
 
-pull_request:
-    branches: 
-      - master
-push:
-    branches: 
-      - master
+on:
+    pull_request:
+        branches: 
+          - master
+    push:
+        branches: 
+          - master
 
 jobs:
 
