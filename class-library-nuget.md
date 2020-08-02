@@ -1,4 +1,4 @@
-# Montar una librería de clases en github
+﻿# Montar una librería de clases en github
 
 Este documento describe los pasos seguidos [este video](https://www.youtube.com/watch?v=hilY0lLxaOs&t=1544s). En el se detalla el proceso de configurar una librería de clases, con el código alojado en github, y que se compila y despliega como paquete nuget. La solución completa se encuentra en [este repositorio](https://github.com/madriddotnet/meetup-github-setup).
 
@@ -115,11 +115,11 @@ Source link es una tecnología que permite depurar código de las dependencias n
 
 Activar la descarga de símbolos en: Herramientas / Opciones / Depuración / Símbolos
 
-(img/source-link-1.jpg)
+(/img/source-link-1.jpg)
 
 Activar y desactivar las siguientes opciones en Herramientas / Opciones / Depuración / General
 
-(img/source-link-2.jpg)
+(/img/source-link-2.jpg)
 
 Cuando quiera dejar de entrar en paquetes nuget, puedo activar el check de habilitar solo mi código.
 
