@@ -16,7 +16,7 @@ Una vez tenemos git funcionando, montamos una solución en visual studio, con al
 
 ## 2. Definir ficheros de configuración
 
-Podemos definir un fichero *global.json*, que guardará la versión necesaria del dsk de netcore para que la solución funcione. Así, quien se clone el repositorio y no tenga el sdk necesario, te avisará de que necesitas esa versión concreta.
+Podemos definir un fichero *global.json*, que guardará la versión necesaria del SDK de netcore para que la solución funcione. Así, a quien se clone el repositorio y no tenga el SDK necesario, le avisará de que necesita esa versión concreta.
 
 ````
 dotnet new global.json
@@ -28,12 +28,11 @@ dotnet new tool-manifest
 ````
 Este fichero guarda la relación de herramientas que hemos instalado en la solución. Así, si alguien se descarga el repositorio, solo tiene que hacer *dotnet tool restore* para que se restauren y tener disponibles las herramientas especificadas.
 
-
 Ahora, procedemos a crear 3 ficheros:
 
 ##### build/dependencies.props
 
-Creamos una carpeta en la raiz del repositorio llamada *build*, y dentro un fichero llamado *dependencies.props*. Este fichero contendrá algunas variables, que despues referenciaremos en los ficheros csproj
+Creamos una carpeta en la raiz del repositorio llamada *build*, y en su interior un fichero llamado *dependencies.props*. Este fichero contendrá algunas variables, que despues referenciaremos en los ficheros csproj
 ````
 <Project>
     <PropertyGroup Label="Default SDK Versions">
@@ -43,7 +42,7 @@ Creamos una carpeta en la raiz del repositorio llamada *build*, y dentro un fich
 </Project>
 ````
 
-En el ejemplo, me he definido dos variables, una con la versión de netcore que voy a usar, y otra con la versión de netstandard. De esta manera, cuando tenga multiples proyectos en mi solución, en vez de que cada uno referencia el sdk concreto, hara referencia a la variable definida. En el momento que quiera subir o bajar alguna versión, lo actualizaré en el fichero que acabo de crear.
+En el ejemplo, me he definido dos variables, una con la versión de netcore que voy a usar, y otra con la versión de netstandard. De esta manera, cuando tenga multiples proyectos en mi solución, en vez de que cada uno referencie el SDK concreto, hara referencia a la variable definida. En el momento que quiera subir o bajar alguna versión, lo actualizaré en el fichero que acabo de crear.
 
 El fichero csproj de la librería de clases haciendo referencia a la variable quedaría así:
 ````
