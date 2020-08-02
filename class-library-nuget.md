@@ -66,7 +66,7 @@ En la raiz del repositorio, creamos un fichero llamado Directory.Build.props
     </PropertyGroup>
 </Project>
 ````
-Este fichero refernecia al que hemos creado anteriormente, *build/dependencies.props*, y establece una serie de propiedades que serán comunes a todos los proyectos. En este caso hemos definido el autor, la empresa que realiza la aplicación y la url del repositorio donde se aloja el código. De esta manera, tendremos estas propiedades centralizadas en un solo fichero, en lugar de estar desperdigadas por los múltiples ficheros csproj que contenga la solución.
+Este fichero referencia al que hemos creado anteriormente, *build/dependencies.props*, y establece una serie de propiedades que serán comunes a todos los proyectos. En este caso hemos definido el autor, la empresa que realiza la aplicación y la url del repositorio donde se aloja el código. De esta manera, tendremos estas propiedades centralizadas en un solo fichero, en lugar de estar desperdigadas por los múltiples ficheros csproj que contenga la solución.
 
 
 ##### Directory.Build.targets
@@ -120,7 +120,7 @@ Activar y desactivar las siguientes opciones en Herramientas / Opciones / Depura
 
 ![Depuración](img/source-link-2.jpg)
 
-Cuando quiera dejar de entrar en paquetes nuget, puedo activar el check de habilitar solo mi código.
+Cuando quiera dejar de entrar en paquetes nuget al depurar, puedo activar el check de habilitar solo mi código.
 
 ##### Configurar mi solución para que funcione Source Link
 
@@ -146,9 +146,9 @@ Añadir lo siguiente en el fichero Directory.Build.props
     </PropertyGroup>
 </Project>
 ````
-En las propiedades, indicamos la url del repositorio, inluimos los símbolos, en formato de nuget (snupkg). También ponemos ContinuousIntegrationBuild para tener build determinísticas, y que en cada build se haga un despliegue. Que las builds sean determinísticas quiere decir que a partir del mismo código fuente, siempre obtenemos el mismo resultado binario.
+En las propiedades, indicamos la url del repositorio, incluimos los símbolos, en formato de nuget (snupkg). También ponemos ContinuousIntegrationBuild para tener builds determinísticas, y que en cada build se haga un despliegue. Que las builds sean determinísticas quiere decir que a partir del mismo código fuente, siempre obtenemos el mismo resultado binario.
 
-De cualquier manera, como la build determinística no nos interesa en local, solo en el entorno de despliegue continuo, podemos añadirle una condición:
+De cualquier manera, como la build determinística solo nos interesa en el entorno de despliegue continuo, y no en local, podemos añadirle una condición:
 ````
 <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
@@ -193,7 +193,7 @@ Destacar varios scripts que son de utilidad, que se pueden tomar como ejemplo de
 - build -> Compila el proyecto, pasa los tests, y genera el paquete nuget en la carpeta artifacts
 
 
-## 5. Aplicar la integración continua en Github actions para publicar un paquete Nuget
+## 5. Implementar la integración continua en Github actions para publicar un paquete Nuget
 
 Podemos crear una Action en github que desencadene el proceso de despliegue, que implicaría lo siguiente:
 
@@ -269,7 +269,7 @@ En cada push / pull request a master:
 
 - Definir el nombre del paquete correctamente. Si el nombre no es único, y ya existe otro paquete con ese nombre de otra organización, la build puede fallar con un 403.
 
-- Crear una variable en *Settings / Secrets* del repositorio en Github, cuyo nombre será NUGET_API_KEY y su valor la api key de Nuget
+- Crear una variable en *Settings / Secrets* del repositorio en Github, cuyo nombre será NUGET_API_KEY y su valor la api key de tu cuenta en nuget.org 
 
 - Definir en el csproj lo siguiente:
 ````
@@ -279,4 +279,4 @@ En cada push / pull request a master:
   </PropertyGroup>
 ````
 
-- Tal y como hemos configurado *rohith/publish-nuget@v2*, toma la versión del csproj. Si la versión ya existiera, nos dará un error 409
+- Tal y como hemos configurado *rohith/publish-nuget@v2*, toma la versión de las propiedades del csproj. Si la versión ya existiera, nos dará un error 409
