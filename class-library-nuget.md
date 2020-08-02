@@ -3,7 +3,7 @@
 Este documento describe los pasos seguidos [este video](https://www.youtube.com/watch?v=hilY0lLxaOs&t=1544s). En el se detalla el proceso de configurar una librería de clases, con el código alojado en github, y que se compila y despliega como paquete nuget. La solución completa se encuentra en [este repositorio](https://github.com/madriddotnet/meetup-github-setup).
 
 
-### 1. Creación del proyecto
+## 1. Creación del proyecto
 
 Primero, creamos un repo en github y lo clonamos, o iniciamos un repositorio en local y le ponemos como remote el repositorio de github creado.
 
@@ -14,7 +14,7 @@ Una vez tenemos git funcionando, montamos una solución en visual studio, con al
 2. Un proyecto con tests unitarios, que tendrá una referencia a la librería de clases
 
 
-### 2. Definir ficheros de configuración
+## 2. Definir ficheros de configuración
 
 Podemos definir un fichero *global.json*, que guardará la versión necesaria del dsk de netcore para que la solución funcione. Así, quien se clone el repositorio y no tenga el sdk necesario, te avisará de que necesitas esa versión concreta.
 
@@ -107,7 +107,7 @@ Esto nos permite definir en un único fichero todos los paquetes nuget que estam
 Centralizando las versiones en un mismo fichero, evitamos que distintos proyectos en la solución consuman el mismo paquete nuget, pero diferentes versiones. Esto provocaría warnings de compilación o errores, y resolverlos suele ser una tarea ardua y engorrosa.
 
 
-### Source Link
+## 3. Source Link
 
 Source link es una tecnología que permite depurar código de las dependencias nuget que utilicemos. Para que funcione, el paquete nugget en cuestión tiene que tenerlo habilitado, y hay que configurar visual studio en la máquina desde la que estemos consumiendo el paquete nuget.
 
@@ -183,7 +183,7 @@ Solo faltaría añadir las propiedades particulares a nuestro proyecto principal
 <Description>description</Description>
 ````
 
-### Scripts de utilidad
+## 4. Scripts de utilidad
 
 Destacar varios scripts que son de utilidad, que se pueden tomar como ejemplo de [aquí](https://github.com/madriddotnet/meetup-github-setup). Todos los scripts están disponibles en formato powershell para windows y bash para linux o mac
 
@@ -194,3 +194,89 @@ Destacar varios scripts que son de utilidad, que se pueden tomar como ejemplo de
 - build -> Compila el proyecto, pasa los tests, y genera el paquete nuget en la carpeta artifacts
 
 
+## 5. Aplicar la integración continua en Github actions para publicar un paquete Nuget
+
+Podemos crear una Action en github que desencadene el proceso de despliegue, que implicaría lo siguiente:
+
+- Compilar nuestro código
+
+- Pasar los tests
+
+- Generar el paquete nuget
+
+- Desplegarlo a nuget.org
+
+
+#### 1. Crear un fichero ci.yaml en .github/workflows
+
+#### 2. Completarlo con algo del estilo a esto:
+
+````
+name: Publish on Nuget
+
+pull_request:
+    branches: 
+      - master
+push:
+    branches: 
+      - master
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    name: Build, pack & publish
+    
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
+      - name: Build & Test
+        run: |
+          dotnet build
+          dotnet test
+
+      - name: publish on version change
+        id: publish_nuget
+        uses: rohith/publish-nuget@v2
+        with:
+          # Filepath of the project to be packaged, relative to root of repository
+          PROJECT_FILE_PATH: path from csproj file
+          
+          # NuGet package id, used for version detection & defaults to project name
+          PACKAGE_NAME: PackageId property from csproj 
+
+          # Regex pattern to extract version info in a capturing group
+          VERSION_REGEX: <Version>(.*)<\/Version>
+
+          # API key to authenticate with NuGet server
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+````
+
+En cada push / pull request a master:
+
+- Configura un entorno linux con netcore
+- Compila la aplicación
+- Lanza **todos los test** que haya en el repositorio
+- Publica el paquete nuget generado
+
+#### 3. A tener en cuenta:
+
+- Definir el nombre del paquete correctamente. Si el nombre no es único, y ya existe otro paquete con ese nombre de otra organización, la build puede fallar con un 403.
+
+- Crear una variable en *Settings / Secrets* del repositorio en Github, cuyo nombre será NUGET_API_KEY y su valor la api key de Nuget
+
+- Definir en el csproj lo siguiente:
+````
+  <PropertyGroup>
+    <Version>1.1</Version>
+    <PackageId>Company.ProjectName</PackageId>
+  </PropertyGroup>
+````
+
+- Tal y como hemos configurado *rohith/publish-nuget@v2*, toma la versión del csproj. Si la versión ya existiera, nos dará un error 409
