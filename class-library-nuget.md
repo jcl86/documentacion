@@ -1,6 +1,7 @@
-# Montar una librería de clases
+# Montar una librería de clases en github
 
-Este documento describe los pasos seguidos [este video](https://www.youtube.com/watch?v=hilY0lLxaOs&t=1544s)
+Este documento describe los pasos seguidos [este video](https://www.youtube.com/watch?v=hilY0lLxaOs&t=1544s), que consiste en cofigurar una librería de clases, con el código alojado en github, y que se compila y despliega como paquete en nuget.
+
 
 ### 1. Creación del proyecto
 
@@ -53,7 +54,7 @@ El fichero csproj de la librería de clases haciendo referencia a la variable qu
 </Project>
 ````
 
-#### Directory.Build-props
+##### Directory.Build-props
 
 En la raiz del repositorio, creamos un fichero llamado Directory.Build.props
 ````
@@ -69,7 +70,7 @@ En la raiz del repositorio, creamos un fichero llamado Directory.Build.props
 Este fichero refernecia al que hemos creado anteriormente, *build/dependencies.props*, y establece una serie de propiedades que serán comunes a todos los proyectos. En este caso hemos definido el autor, la empresa que realiza la aplicación y la url del repositorio donde se aloja el código. De esta manera, tendremos estas propiedades centralizadas en un solo fichero, en lugar de estar desperdigadas por los múltiples ficheros csproj que contenga la solución.
 
 
-#### Directory.Build.targets
+##### Directory.Build.targets
 
 En la raiz del repositorio, creamos un fichero llamado Directory.Build.targets
 ````
@@ -106,4 +107,78 @@ Esto nos permite definir en un único fichero todos los paquetes nuget que estam
 Centralizando las versiones en un mismo fichero, evitamos que distintos proyectos en la solución consuman el mismo paquete nuget, pero diferentes versiones. Esto provocaría warnings de compilación o errores, y resolverlos suele ser una tarea ardua y engorrosa.
 
 
-###
+### Source Link
+
+Source link es una tecnología que permite depurar código de las dependencias nuget que utilicemos. Para que funcione, el paquete nugget en cuestión tiene que tenerlo habilitado, y hay que configurar visual studio en la máquina desde la que estemos consumiendo el paquete nuget.
+
+##### Configurar visual studio para poder consumir paquetes nuget con Source Link
+
+Activar la descarga de símbolos en: Herramientas / Opciones / Depuración / Símbolos
+
+(img/source-link-1.jpg)
+
+Activar y desactivar las siguientes opciones en Herramientas / Opciones / Depuración / General
+
+(img/source-link-2.jpg)
+
+Cuando quiera dejar de entrar en paquetes nuget, puedo activar el check de habilitar solo mi código.
+
+##### Configurar mi solución para que funcione Source Link
+
+Añadir lo siguiente en el fichero Directory.Build.props
+
+````
+<Project>
+    <Import Project="build/dependencies.props"/>
+    <PropertyGroup Label="Default Metadata">
+        ...
+        <PackageProjectUrl>url del repo</PackageProjectUrl>
+        <RepositoryUrl>url del repo</RepositoryUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>true;</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        ...
+    </PropertyGroup>
+    
+    <PropertyGroup>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+</Project>
+````
+En las propiedades, indicamos la url del repositorio, inluimos los símbolos, en formato de nuget (snupkg). También ponemos ContinuousIntegrationBuild para tener build determinísticas, y que en cada build se haga un despliegue. Que las builds sean determinísticas quiere decir que a partir del mismo código fuente, siempre obtenemos el mismo resultado binario.
+
+De cualquier manera, como la build determinística no nos interesa en local, solo en el entorno de despliegue continuo, podemos añadirle una condición:
+````
+<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+</PropertyGroup>
+````
+
+Además, es necesario incluir una referencia al paquete de nuget relativo a Source Link del sitio donde alojes el código, en nuestro caso github.
+
+````
+<ItemGroup>
+    <SourceRoot Include="$(MSBuildThisFileDirectory)/"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+</ItemGroup>
+````
+
+Por último, hay que hacer un pequeño workaround para que las propiedades comunes se copien en el paquete de source link que se genera. Hay que incluir en el Directory.Build.targets:
+
+````
+<ItemGroup>
+    <!-- https://github.com/dotnet/sourcelink/issues/572 -->
+    <EmbeddedFiles Include="$(GeneratedAssemblyInfoFile)"/>
+</ItemGroup>
+````
+
+Solo faltaría añadir las propiedades particulares a nuestro proyecto principal, como la versión y la descripción. Incluiríamos en el csproj:
+````
+<PackageVersion>1.0.1$(VersionSuffix)</PackageVersion>
+<Description>description</Description>
+````
