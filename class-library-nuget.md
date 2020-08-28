@@ -252,7 +252,7 @@ jobs:
           PACKAGE_NAME: PackageId property from csproj 
 
           # Regex pattern to extract version info in a capturing group
-          VERSION_REGEX: <Version>(.*)<\/Version>
+          VERSION_REGEX: <PackageVersion>(.*)<\/PackageVersion>
 
           # API key to authenticate with NuGet server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
