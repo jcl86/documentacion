@@ -71,5 +71,30 @@ Para que las peticiones no vayan por afinidad a una instancia concreta. Así dej
 
 Tienes un slot de producción y uno de test. Haces el deploy en el slot de test, y luego haces swap en azure, para intercambiar los slots.
 
+*A/B testing*, *Blue green deployment*
+
+# Warm up
+
+"Calentar" la instancia al hacer el swap, para que no haya un tiempo de espera en lo que tarda en arrancarse la aplicación.
+
+# Local cache
+
+Para guardar en el propio almacenamiento del App Service, se puede utilizar la opción de local cahé
+
+- Pros: No dependes del almacenamiento externo donde se guardan por defecto los datos
+
+- Contras: Cada vez que despliegas debes reiniciar el App Service
+
+Para activarlo, ir Settings -> Configuration y Añadir una application setting:
+
+- Name: WEBSITE_LOCAL_CACHE_OPTION
+
+- Value: Always
+
+# Health Check
+
+En el menú de App Service, opción Health check (en preview), Enable, y en path le pones el endpoint que dice si la aplicación está funcionando ok ("/alive", por ejemploj)
+
+
 
 
