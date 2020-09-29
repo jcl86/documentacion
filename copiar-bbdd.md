@@ -14,4 +14,4 @@ RESTORE DATABASE dbname FROM DISK = 'C:\temp\file.bak'
   MOVE 'dbname_log' TO 'C:\...\dbname.ldf';
 ````
 
-(Fuente)[https://dba.stackexchange.com/questions/76210/how-to-copy-database-from-server-to-local-machine-in-sql-server-management-studi]
+[Fuente](https://dba.stackexchange.com/questions/76210/how-to-copy-database-from-server-to-local-machine-in-sql-server-management-studi)
