@@ -20,3 +20,7 @@
 
 [Montar una librería de clases que se despliege en Nuget](class-library-nuget.md)
 
+# Bases de datos
+
+[Copiar base de datos de producción a localhost](copiar-bbdd.md)
+
