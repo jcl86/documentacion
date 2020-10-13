@@ -35,7 +35,7 @@ public static void Main(string[] args)
 
 2. Configurar serilog para utilizarlo como logger en la aplicación
 
-````
+````csharp
   public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
@@ -43,9 +43,8 @@ public static void Main(string[] args)
                     webBuilder.UseStartup<Startup>();
                 }).ConfigureLogging(logging =>
                 {
-                    logging.ClearProviders();
+                    logging.ClearProviders(); // Borrar los proveedores prerregistrados de ASP NET Core.
                 })
-                 //Añadimos Serilog obteniendo la configuración desde Microsoft.Extensions.Configuration
                  .UseSerilog();
 ````
 
@@ -82,14 +81,14 @@ Podríamos mapear más de una excepción con este sistema.
 
 1. Al crear el logger, añadir que lea de la configuración:
 
-````
+````csharp
     Log.Logger = new LoggerConfiguration()
        .ReadFrom.Configuration(Configuration)
        .CreateLogger();
 ````
 
 2. Crear en la clase Program la siguiente propiedad:
-````
+````csharp
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -97,7 +96,7 @@ Podríamos mapear más de una excepción con este sistema.
 ````
 
 3. Agregar la configuración en el fichero appsettings.json
-````
+````csharp
 "Serilog": {
     "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File" ],
     "WriteTo": [
@@ -128,7 +127,7 @@ Podríamos mapear más de una excepción con este sistema.
 ````
 
 4. En la llamada a UseSerilog, sustituirlo por:
-````
+````csharp
 .UseSerilog((HostBuilderContext context, LoggerConfiguration loggerConfiguration) =>
  {
      loggerConfiguration.ReadFrom.Configuration(context.Configuration);
@@ -143,7 +142,7 @@ Si la aplicación se va a subir a azure, el destino idoneo para los logs es envi
 
 2. Añadir el sink de AI al crear el logger
 
-````
+````csharp
   .WriteTo.ApplicationInsights(TelemetryConverter.Traces)
 ````
 
