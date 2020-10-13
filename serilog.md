@@ -35,7 +35,7 @@ public static void Main(string[] args)
 
 2. Configurar serilog para utilizarlo como logger en la aplicación
 
-´´´´
+````
   public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
@@ -47,7 +47,7 @@ public static void Main(string[] args)
                 })
                  //Añadimos Serilog obteniendo la configuración desde Microsoft.Extensions.Configuration
                  .UseSerilog();
-´´´´
+````
 
 3. Eliminar en appsettings.json las referencias al log
 
