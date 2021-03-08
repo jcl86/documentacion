@@ -4,6 +4,8 @@
 
 [Gestión avanzada](git-avanzado.md)
 
+[Windows terminal](windows-terminal.md)
+
 # dotnet
 
 [Configurar opciones en Visual Studio](visual-studio.md)
