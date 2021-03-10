@@ -3,10 +3,11 @@
 - Instalar una distribución como ubuntu
 - Instalar xclip
 - Instalar git
-
 - En etc/passwd o etc/shadow se guardan las contraseñas hasheadas
-- 
-| - | - |
+
+
+| Comando | Explicación |
+| -- | -- |
 | whoami/who am i | Identificador de usuario |
 | id | Identificador de usuario y grupos |
 | pwd | Lugar en el sistema de archivos |
@@ -20,14 +21,15 @@
 
 # Ficheros
 
+| Comando | Explicación |
+| -- | -- |
 | cat | Mostrar el contenido de un fichero |
 | more / less | Mostrar el contenido de un fichero página a página |
 | cp | Copia un fichero |
 | mv | Mueve y renombra |
 | rm | Elimina un fichero |
 | file | Muestra el tipo de un fichero |
-
-| cd | Cambia de directorio 
+| cd | Cambia de directorio |
 | cd | Cambia al directorio home del usuario |
 | cd ~ | Cambia al directorio home del usuario |
 | cd ~username | Cambia al directorio home del usuario username |
@@ -37,10 +39,7 @@
 | mkdir | Crea un directorio |
 | rmdir | Eliomina un directorio |
 | df | Muestra el espacio disponible |
-| du | Espacio ocupado por un subárbol
-del sistema de archivos |
-
-
+| du | Espacio ocupado por un subárbol del sistema de archivos |
 
 
 Fuente [Fuente](https://miriadax.net/web/introduccion-a-linux-como-entorno-de-desarrollo-de-sistemas-software-2-edicion-consulta/)
