@@ -64,7 +64,7 @@ Cuando vi arranca, lo hace en modo comando.
 | i | Pasa a modo inserción antes del cursor |
 | a |  Pasa a modo inserción después del cursor |
 | o |  Pasa a modo inserción al comienxo de una nueva linea |
-| ZZ | Guardar y salir |
+| :x | Guardar y salir |
 | :q | Salir sin guardar (aqune pregunta) |
 | CTRL+z | Suspender edición (Se recupera con fg) |
 | dd | Borra la linea donde está el cursor |
