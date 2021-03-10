@@ -42,5 +42,36 @@
 | du | Espacio ocupado por un subárbol del sistema de archivos |
 
 
+# Vi
+
+Para editar un fichero:
+````
+vi file.txt
+vi -r file.txt (Para recuperar el fichero tras una caída)
+````
+
+En vi, solo se utiliza el teclado. Tiene dos modos:
+
+- Modo comando. El texto se interpreta como un comando
+- Modo inserción. El texto se inserta en el documento.
+
+Cuando vi arranca, lo hace en modo comando.
+- Para pasar a modo inserción: i
+- Para salir a modo comando: ESC
+
+| Comando | Explicación |
+| -- | -- |
+| i | Pasa a modo inserción antes del cursor |
+| a |  Pasa a modo inserción después del cursor |
+| o |  Pasa a modo inserción al comienxo de una nueva linea |
+| ZZ | Guardar y salir |
+| :q | Salir sin guardar (aqune pregunta) |
+| CTRL+z | Suspender edición (Se recupera con fg) |
+| dd | Borra la linea donde está el cursor |
+| u | Deshacer último cambio |
+| /texto | Busca texto hacia delante |
+| :r fichero | inserta el contenido de fichero |
+
+
 Fuente [Fuente](https://miriadax.net/web/introduccion-a-linux-como-entorno-de-desarrollo-de-sistemas-software-2-edicion-consulta/)
 
