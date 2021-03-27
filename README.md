@@ -26,7 +26,7 @@
 
 [Montar una librería de clases que se despliege en Nuget](class-library-nuget.md)
 
-[Montar una api rest](api-index.md)
+[Montar una api rest](api-rest/index.md)
 
 # Bases de datos
 
