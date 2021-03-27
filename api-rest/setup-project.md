@@ -50,10 +50,23 @@ dotnet add src\Ecommerce.Host reference src\Ecommerce.Infraestructure\
 dotnet add test\Ecommerce.FunctionalTests\ reference src\Ecommerce.Model\
 ````
 
-Por último, ya podemos abrir visual studio y empezar a atrabajar sobre esta solución. 
+
+### Configuración adicional
+
+Como veíamos en [Montar una librería de clases](https://github.com/jcl86/documentacion/blob/master/class-library-nuget.md), podemos hacer una serie de ajustes adicionales en la solución que, más adelante, nos facilitarán la vida. Lo más interesante sería:
+
+- Agregar un fichero build/dependencies.props con variables comunes a todos los proyectos
+- Agregar un fichero Directory.Build.targets con el compendio de versiones de paquetes nuget
+- Hacer dotnet new global.json
+- Hacer dotnet new tool-manifest, para que cualquiera que se baje el repo y haga dotnet tool restore, tenga disponibles las herramientas requeridas por el proyecto
+- Implementar en .github/workflows un par de pipelines, de integración continua y de despliegue continuo.
+
+Por último, ya podemos abrir visual studio y empezar a trabajar sobre esta solución. 
 
 ````
 Ecommerce.sln
 ````
 
 Cabe decir que todos estos pasos se pueden realizar desde el propio IDE, pero desde la consola, una vez que conoces los comandos necesarios, acaba resultando más rápido.
+
+
