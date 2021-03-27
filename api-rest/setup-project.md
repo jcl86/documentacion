@@ -21,11 +21,13 @@ Y creamos los proyectos necesarios. Si queremos conocer los diferentes tipos de 
 
 ````
 dotnet new webapi -o src/Ecommerce.Host
-dotnet new xunit -o test/Ecommerce.FunctionalTests
 dotnet new classlib -o src/Ecommerce.Infraestructure
 dotnet new classlib -o src/Ecommerce.Domain
+dotnet new classlib -o src/Ecommerce.Model
+dotnet new xunit -o test/Ecommerce.FunctionalTests
+dotnet new xunit -o test/Ecommerce.UnitTests
 ````
-Hemos creado un proyecto tipo webapi (Host) que alojará la Api rest, un proyecto para implemetar pruebas funcionales, y un par de librerías de clases para alojar la infraestructura y la lógica de negocio. Como podéis deducir por la división de los proyectos, intentaremos seguir un enfoque hexagonal. 
+Hemos creado un proyecto tipo webapi (Host) que alojará la Api rest, un par de proyectos para implemetar tests, y un par de librerías de clases para alojar la infraestructura y la lógica de negocio. Como podéis deducir por la división de los proyectos, intentaremos seguir un enfoque hexagonal. 
 
 Adicionalmente, separaremos los módelos en otra librería de clases (Ecommerce.Model). Así, podremos consumir la api, tanto desde las pruebas, como desde un cliente que agregaremos un el futuro, agregando una referencia.
 
@@ -36,8 +38,10 @@ Ahora, queda agregar en la solución los proyectos:
 dotnet sln Ecommerce.sln add src\Ecommerce.Host\
 dotnet sln Ecommerce.sln add src\Ecommerce.Domain\
 dotnet sln Ecommerce.sln add src\Ecommerce.Infraestructure\
-dotnet sln Ecommerce.sln add test\Ecommerce.FunctionalTests\
 dotnet sln Ecommerce.sln add src\Ecommerce.Model\
+dotnet sln Ecommerce.sln add test\Ecommerce.FunctionalTests\
+
+dotnet sln Ecommerce.sln add test\Ecommerce.UnitTests\Ecommerce.UnitTests.csproj
 ````
 
 Y agregar las referencias entre proyectos:
@@ -48,8 +52,8 @@ dotnet add src\Ecommerce.Host reference src\Ecommerce.Domain\
 dotnet add src\Ecommerce.Infraestructure reference src\Ecommerce.Domain\
 dotnet add src\Ecommerce.Host reference src\Ecommerce.Infraestructure\
 dotnet add test\Ecommerce.FunctionalTests\ reference src\Ecommerce.Model\
+dotnet add test\Ecommerce.UnitTests\ reference src\Ecommerce.Domain\
 ````
-
 
 ### Configuración adicional
 
