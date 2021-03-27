@@ -25,15 +25,29 @@ dotnet new xunit -o test/Ecommerce.FunctionalTests
 dotnet new classlib -o src/Ecommerce.Infraestructure
 dotnet new classlib -o src/Ecommerce.Domain
 ````
-Hemos creado un proyecto tipo webapi (Host) que alojará la Api rest, un proyecto para implemetar pruebas funcionales, y un par de librerías de clases para alojar la infraestructura y la lógica de negocio. Como podéis deducir por la división de los proyectos, intentaremos seguir un enfoque hexagonal.
+Hemos creado un proyecto tipo webapi (Host) que alojará la Api rest, un proyecto para implemetar pruebas funcionales, y un par de librerías de clases para alojar la infraestructura y la lógica de negocio. Como podéis deducir por la división de los proyectos, intentaremos seguir un enfoque hexagonal. 
+
+Adicionalmente, separaremos los módelos en otra librería de clases (Ecommerce.Model). Así, podremos consumir la api, tanto desde las pruebas, como desde un cliente que agregaremos un el futuro, agregando una referencia.
+
 Con el parametro -o (de output), le indicamos la ruta donde queremos que se cree el proyecto. Recordad que con la tecla tab nos autocompleta, no es necesario escribir la ruta letra por letra.
 
-Ahora, queda agregar en la solución las referencias a los proyectos:
+Ahora, queda agregar en la solución los proyectos:
 ````
 dotnet sln Ecommerce.sln add src\Ecommerce.Host\
 dotnet sln Ecommerce.sln add src\Ecommerce.Domain\
 dotnet sln Ecommerce.sln add src\Ecommerce.Infraestructure\
 dotnet sln Ecommerce.sln add test\Ecommerce.FunctionalTests\
+dotnet sln Ecommerce.sln add src\Ecommerce.Model\
+````
+
+Y agregar las referencias entre proyectos:
+````
+dotnet add src\Ecommerce.Domain reference src\Ecommerce.Model\
+dotnet add src\Ecommerce.Host reference src\Ecommerce.Model\
+dotnet add src\Ecommerce.Host reference src\Ecommerce.Domain\
+dotnet add src\Ecommerce.Infraestructure reference src\Ecommerce.Domain\
+dotnet add src\Ecommerce.Host reference src\Ecommerce.Infraestructure\
+dotnet add test\Ecommerce.FunctionalTests\ reference src\Ecommerce.Model\
 ````
 
 Por último, ya podemos abrir visual studio y empezar a atrabajar sobre esta solución. 
