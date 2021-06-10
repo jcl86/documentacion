@@ -90,7 +90,7 @@ Merge trae los commits realizados en master, y los pone en tu rama actual, añad
 git rebase master
 ````
 
-Rebase trae todos los commits realizados en master, y los coloca en orden en antes de los commits de tu rama. Esto en realidad a recreado el índice, por lo que en realidad tu rama ha cambiado completamente. Cuando vuelques los commits de tu rama en el remoto, deberás hacer un push --force, para que se olvide de como está tu rama en el remote, y sobreescriba los cambios de tu local en el remote. Esto solo es viable si sobre la rama que haces rebase trabaja un solo desarrollador, porque si trabajan varios, al hacer push y reorganizar la rama, harás que los otros desarrolladores tengan conflictos.
+Rebase trae todos los commits realizados en master, y los coloca en orden en antes de los commits de tu rama. Esto en realidad ha recreado el índice, por lo que en realidad tu rama ha cambiado completamente. Cuando vuelques los commits de tu rama en el remoto, deberás hacer un push --force, para que se olvide de como está tu rama en el remote, y sobreescriba los cambios de tu local en el remote. Esto solo es viable si sobre la rama que haces rebase trabaja un solo desarrollador, porque si trabajan varios, al hacer push y reorganizar la rama, harás que los otros desarrolladores tengan conflictos.
 
 ````
 git rebase -i HEAD~3
