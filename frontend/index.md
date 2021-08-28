@@ -77,23 +77,38 @@ Podemos delegar en webpack la construcción de nuestros entregables, es decir, q
 build: webpack --mode production
 dev: webpack --mode development --watch
 ````
+
+Y al ejecutar npm run build, se generará la build de la aplicación.
+
 Hay dos modos:
  - **Desarrollo** Para desarrollar, en caso de que haya errores, es fácil ver en que linea se produce
  - **Producción** Optimiza los ficheros para producción
 
-Y al ejecutar npm run build, se generará la build de la aplicación
+Cuando ejecutas webpack, corre con una configuración por defecto. Si quieres que corra con una otra configuración, puedes generar un fichero llamado webpack.config.js. Si quieres llamar al fichero de otra manera, cuando ejecutes webpack lo puedes llamar con el parámetro --config: *webpack --config nombreFicheroConfiguracion.js* 
 
-El parámetro watch hace queen cuanto se detecte un campio, compile y lo sirva inmediatamente.
+El parámetro watch hace queen cuanto se detecte un cambio, compile y lo sirva inmediatamente.
 
 ### Entry point
 
 El punto de entrada de la aplicación es por donde empieza webpack a tirar del hilo. A partir de ahí va buscando dependencias, y todo lo que encuentre lo dejará en la carpeta de salida. El punto de entrada por defecto es './src/index.js', y el punto de salida por defecto './dist/main.js'
 
-### Punto2 webpack
-### Punto3 webpack
-### Punto4 webpack
+````
+const path = require("path");
 
-## Babel
+module.exports = {
+  entry: "./src/index.js",
+  output: {
+    filename: "main.[hash].js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true,
+  },
+}
+````
+
+Con el fichero de configuración anterior, dejará los ficheros en la carpeta dist'./dist/', el nombre del fichero javascript será main.js, y limpiará la carpeta dist antes de hacer la build (clean:true). Además, estamos metiendo un hash en el fichero main.js, para que los navegadores no cacheen una versión antigua si hemos desplegado nuevo código.
+
+
+### Babel y los loaders
 
 A través de webpack, Babel es la herramienta que permite traducir javascript moderno a javascript que entienda cualquer navegador antiguo. Así, nosotros podemos utilizar las últimas novedades del lenguaje, dando el máximo soporte posible.
 
@@ -101,9 +116,89 @@ A través de webpack, Babel es la herramienta que permite traducir javascript mo
 npm install @babel/preset-env @babel/core @babel-loader -D
 ````
 
+Estos tres paquetes instalan lo básico para que funcione babel. Luego, podemos añadir otros loaders. Los loaders permiten "traducir" otro tipo de ficheros.
+
+````
+npm install css-loader html-loader style-loader -D
+````
+    
+````
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+      {
+        test: /\.m?js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        type: "asset",
+      },
+    ],
+  },
+};
+````
+
+### Plugins
+
+Los plugins son puntos, dentro del proceso que hace webpack, en los que puedes en los que puedes "engancharte" para realizar tareas, como si fuesen "hooks"
+
+Instalamos el plugin html-webpack-plugin 
+
+````
+npm install -D html-webpack-plugin
+````
+
+Y lo añadimos en la configuración de webpack
+
+````
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+module.exports = {
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+    }),
+  ]
+}
+````
+
+Esto nos permite tener un fichero index.html y un fichero index.js. Podemos, incluso, quitar la referencia que tiene el primero hacia el segundo. Una vez compilemos y hagamos la build, en dist se habrán copiado los dos ficheros, y el html tendrá la referncia al js correcta, incluso se habrá añadido el hash al fichero js, si así lo habíamos indicado en la sección output de la configuración de webpack.
 
 
-Bibliografía:
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+
+
+
+
+### Webpack dev server
+
+A medida que desarrollemos, los ficheros a copiar serán cada vez más grandes, haciendo que el proceso de contrucción de nuestra aplicación sea más largo. Podemos instalar un paquete de npm que nos provee un servidor que guarda en memoria los ficheros, en vez de escribirlos en disco
+
+````
+npm install -D webpack-dev-server
+````
+
+Y para ejecutarlo, sustituir el scrip de dev, en lugar de *webpack --mode development*  por *dev: webpack serve*. En vez de copiar ficheros en dist, los copia en memoria
+
+
+## Configurar EsLint y Prettier
+
+Pendiente
+
+## Bibliografía:
 
 https://www.youtube.com/watch?v=ansUGkcrhwY
 
