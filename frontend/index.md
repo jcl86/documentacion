@@ -113,7 +113,7 @@ Con el fichero de configuración anterior, dejará los ficheros en la carpeta di
 A través de webpack, Babel es la herramienta que permite traducir javascript moderno a javascript que entienda cualquer navegador antiguo. Así, nosotros podemos utilizar las últimas novedades del lenguaje, dando el máximo soporte posible.
 
 ````
-npm install @babel/preset-env @babel/core @babel-loader -D
+npm install @babel/preset-env @babel/core babel-loader -D
 ````
 
 Estos tres paquetes instalan lo básico para que funcione babel. Luego, podemos añadir otros loaders. Los loaders permiten "traducir" otro tipo de ficheros.
