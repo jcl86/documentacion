@@ -30,6 +30,8 @@
 
 [Montar una api rest](api-rest/index.md)
 
+[Crear aplicación frontend](frontend/index.md)
+
 # Bases de datos
 
 [Copiar base de datos de producción a localhost](copiar-bbdd.md)
