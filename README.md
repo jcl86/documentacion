@@ -1,8 +1,7 @@
+# Mis apuntes
 
-[Linux](linux.md)
 
-
-# GIT
+### GIT
 
 [Comandos básicos](git-basico.md)
 
@@ -10,7 +9,13 @@
 
 [Windows terminal](windows-terminal.md)
 
-# dotnet
+
+### Sistemas operativos
+
+[Linux](linux.md)
+
+
+### dotnet
 
 [Configurar opciones en Visual Studio](visual-studio.md)
 
@@ -24,15 +29,17 @@
 
 [Old IIS things](old-iis.md)
 
+
 ### Paso a paso
 
 [Montar una librería de clases que se despliege en Nuget](class-library-nuget.md)
 
 [Montar una api rest](api-rest/index.md)
 
-[Crear aplicación frontend](frontend/index.md)
+[Crear aplicación web cliente](frontend/index.md)
 
-# Bases de datos
+
+### Tips varios
 
 [Copiar base de datos de producción a localhost](copiar-bbdd.md)
 
