@@ -1,7 +1,7 @@
 
 # Git
 
-[Git](https://es.wikipedia.org/wiki/Git) es un sistema de control de versiones (Source Code Mamanagement) distribuido. A diferencia de los sistemas centralizados, en los que el codigo fuente está en un servidor y los desarrolladores trabajan contra él (mejorar esta explicación), git funciona de manera diferente. Tú te clonas el repositorio, que es una copia exacta del repositorio del servidor, realizas tus cambios en local, y vas sincronizando tu repositorio local con el repositorio remoto.
+[Git](https://es.wikipedia.org/wiki/Git) es un sistema de control de versiones (Source Code Mananagement) distribuido. En los sistemas centralizados, el codigo fuente está en un servidor y los desarrolladores, cada vez que requieren realizar una operación, deben de estar conectados a ese servidor. Git, sin embargo, funciona de manera diferente. Tú te clonas el repositorio, que es una copia exacta del repositorio del servidor, realizas tus cambios en local, y vas sincronizando tu repositorio local con el repositorio remoto.
 
 Pero... ¿qué es un [repositorio](https://es.wikipedia.org/wiki/Repositorio_(contenido_digital))? Según wikipedia es un espacio centralizado donde se almacena, organiza, mantiene y difunde información digital. Vamos, como si fuera una carpeta de dropbox o google drive, pero con facilidades para llevar el control de cambios.
 
@@ -82,7 +82,7 @@ git commit -am "mensaje"  -> Si incluimos la a añade al area de staging todos l
 
 ### Stash
 
-El area de stash es como un agujero en el suelo donde guardas los cambios que tienes en el area de staging, para recuperarlos más tarde. En vez de hacer commit, haces stash.
+El area de stash es como un agujero en el suelo donde guardas los cambios que tienes en el working tree, para recuperarlos más tarde. En vez de hacer commit, haces stash.
 
 ````
 git stash        -> Añade los ficheros del area de staging a la zona de stash
@@ -90,6 +90,7 @@ git stash pop    -> Recupera los ficheros de stash
 git stash pop n  -> Donde n es el índice numerico. Si has hecho varios stash, el último será 0, el anterior 1, etc
 git stash list   -> Muestra la lista de stash
 ````
+Estas trabajando desarrollando una funcionalidad y, sin haberla terminado, debes resolver otra cuestión más prioritaria en ese mismo repositorio. Haces *"stash"* de los cambios que tienes sin subir, resuelves la cuestión más prioritaria, y una vez que has finalizado con ella, recuperas lo cambios que guardaste en el *"stash"*. 
 
 ### Tag
 
@@ -147,7 +148,7 @@ git fetch -ap       -> Trae los cambios en el índice -a (todos los remotos) y -
 
 ### Ayudas
 
-Ejemplos y ayuda sobre un comando en concreto (Too long didn't read) (Nota: esto me parece que habría que instalar algúna cosa extra)
+Ejemplos y ayuda sobre un comando en concreto (Too long didn't read). Puedes instalarlo globalmente con npm (*npm install -g tldr*)
 ````
 tldr comando
 ````
