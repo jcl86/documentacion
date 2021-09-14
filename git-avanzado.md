@@ -120,15 +120,16 @@ git revert @  -> revierte el último commit
 
 ````
 
-#### Undo, discard y reset
+#### Reset
 
 Deshacer commits, es decir, borrarlos del log como si no se hubieran hecho
 
 ````
-git undo -> Es un alias de git reset HEAD~1 --mixed
-git discard -> Es un alias de git reset HEAD~1 --hard
+git reset HEAD~1 --soft
+git reset HEAD~1 --mixed
+git reset HEAD~1 --hard
 ````
-HEAD~1 es el útimo commit
+HEAD~1 es el útimo commit.
 
 Soft -> Deja los cambios deshechos del commit subidos en el staging area
 
