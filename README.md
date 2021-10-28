@@ -29,6 +29,8 @@
 
 [Old IIS things](old-iis.md)
 
+[Script despliege manual app blazor](deploy-blazor-app-manually.md)
+
 
 ### Paso a paso
 
