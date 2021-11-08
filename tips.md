@@ -57,4 +57,22 @@ alias gl="git log --graph --abbrev-commit --oneline";
 
 La primera linea, para que vaya al directorio de inicio que quiero. Las otras me añaden alias útiles
 
+# Como hacer funcionar un proyecto de .NET
+
+A veces, las cosas no salen bien a la primera. Ya sea porque te clonas un repo algo antiguo, o porque hay algún problema con el gitignore y tienes paquetes obsoletos, puede que el repositorio que te has clonado no funcione correctamente. Si es el caso, puedes intentar lo siguiente:
+
+1. dotnet restore
+
+O también desde Visual Studio -> Botón derecho sobre la solución -> Restaurar paquetes nuget
+
+2. Reinstalar los paquetes nugget (mediante la consola del administrador de paquetes)
+
+````
+update-package -reinstall 
+````
+*Si te diera error algún paquete, Botón derecho sobre la solución -> Restaurar paquetes de nuget*
+
+Si sigue fallando, vuelve a empezar. Haz un git reset HEAD~0 --hard
+
+3. dotnet run
 
