@@ -35,6 +35,7 @@ Aplicación cliente Html + css + js
 [Webpack world](frontend/index.md)
 
 Aplicación cliente Blazor
+- [Basics](blazor/basics.md)
 - Parte cliente (instalar webpack e integración con tailwind)
 - Scripts
 - Librería cliente con repositorios
