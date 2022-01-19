@@ -148,11 +148,11 @@ Hace commit de los cambios subidos y los junta al commit anterior
 
 ### Cherry pick
 
-Cherry pick se usa para volcar unos cambios concretos a master. por ejemplo, un commit que arregla un bug en producción, y que solo se quiere volcar ese único commit.
-Desde master, cojo una o más cerezas (cereza = commit) y me la como (la integro en master)
+Cherry pick se usa para volcar unos cambios concretos de una rama a otra. Por ejemplo, has hecho commit que arregla un bug en producción, y solo quieres volcar ese commit.
+Desde main, cojo una o más cerezas de otra rama (cereza = commit) y me la como (la integro en main)
 
 ````
-git checkout master -> Me cambio a la rama master
+git checkout main -> Me cambio a la rama main
 git cherry-pick identificadorCommit
 git cherry-pick commitDesde~..commitHasta
 ````
