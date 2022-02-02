@@ -19,7 +19,8 @@ Una vez tenemos git funcionando, montamos una solución en visual studio, con al
 Podemos definir un fichero *global.json*, que guardará la versión necesaria del SDK de netcore para que la solución funcione. Así, a quien se clone el repositorio y no tenga el SDK necesario, le avisará de que necesita esa versión concreta.
 
 ````
-dotnet new global.json
+dotnet new globaljson
+dotnet new globaljson --sdk-version 6.0.101
 ````
 
 También podemos definir otro fichero, *dotnet-tools.json*. Con el siguiente comando: 
