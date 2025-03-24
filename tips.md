@@ -76,3 +76,26 @@ Si sigue fallando, vuelve a empezar. Haz un git reset HEAD~0 --hard
 
 3. dotnet run
 
+# Como matar un proceso que se ha quedado colgado
+
+````
+fail: Microsoft.Extensions.Hosting.Internal.Host[11]
+      Hosting failed to start
+      System.IO.IOException: Failed to bind to address https://127.0.0.1:8000: address already in use.
+````
+
+Encontrar el proceso que ocupa ese puerto:
+````
+netstat -ano | findstr :<PUERTO>
+````
+
+Buscar el proceso por el PID obtenido anteriormente:
+````
+tasklist /FI "PID eq <PID>"
+````
+
+Forzar la finalización del proceso
+````
+taskkill /PID <PID> /F
+````
+
